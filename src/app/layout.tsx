@@ -1,8 +1,14 @@
 import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
-import './globals.css';
+import { Inter as FontSans } from 'next/font/google';
+import '@/styles/globals.css';
 
-const inter = Inter({ subsets: ['latin'] });
+import { cn } from '@/lib/utils';
+import { Toaster } from 'sonner';
+
+export const fontSans = FontSans({
+  subsets: ['latin'],
+  variable: '--font-sans',
+});
 
 export const metadata: Metadata = {
   title: 'QuickLink',
@@ -15,8 +21,17 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
-      <body className={inter.className}>{children}</body>
+    <html lang="en" className="dark">
+      <body
+        className={cn(
+          'min-h-screen bg-background font-sans antialiased',
+          fontSans.variable
+        )}
+      >
+        <Toaster richColors expand={true} />
+
+        <main>{children}</main>
+      </body>
     </html>
   );
 }
