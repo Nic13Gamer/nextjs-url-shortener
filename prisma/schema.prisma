@@ -57,14 +57,19 @@ model User {
   sessions      Session[]
 
   shortUrls ShortUrl[]
+
+  createdAt DateTime @default(now())
 }
 
 model ShortUrl {
-  id          String  @id @default(cuid())
-  randomName  String
-  customName  String?
+  id String @id @default(cuid())
+
+  name        String    @unique
   destination String
+  expiresAt   DateTime?
 
   userId String?
   user   User?   @relation(fields: [userId], references: [id])
+
+  createdAt DateTime @default(now())
 }

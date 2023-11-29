@@ -1,9 +1,9 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { Button } from '../ui/button';
+import { Button, buttonVariants } from '../ui/button';
 import { Input } from '../ui/input';
-import { ClipboardPaste, Loader2 } from 'lucide-react';
+import { ClipboardCopy, ClipboardPaste, Loader2 } from 'lucide-react';
 import {
   Tooltip,
   TooltipContent,
@@ -16,6 +16,7 @@ import { toast } from 'sonner';
 
 const initialState = {
   message: null,
+  shortUrl: null,
 };
 
 function SubmitButton() {
@@ -40,6 +41,11 @@ export default function DemoShortenForm() {
     const message = state.message;
 
     if (message) toast.error(message);
+
+    if (state.url) {
+      navigator.clipboard.writeText(`${window.location.origin}/r/${state.url}`);
+      toast.info('Quick Link copied!');
+    }
   }, [state]);
 
   return (
@@ -49,43 +55,81 @@ export default function DemoShortenForm() {
     >
       <h1 className="text-3xl text-center font-semibold">Try it</h1>
 
-      <div className="flex gap-1">
-        <div className="flex gap-2 w-full items-center">
-          <TooltipProvider>
-            <Tooltip>
-              <TooltipTrigger asChild>
-                <Button
-                  variant="ghost"
-                  size="icon"
-                  type="button"
-                  onClick={async () =>
-                    setInput(await navigator.clipboard.readText())
-                  }
-                >
-                  <ClipboardPaste />
-                </Button>
-              </TooltipTrigger>
-              <TooltipContent>
-                <p>Paste URL from clipboard</p>
-              </TooltipContent>
-            </Tooltip>
-          </TooltipProvider>
+      {!state.url ? (
+        <div className="flex gap-1">
+          <div className="flex gap-2 w-full items-center">
+            <div className="hidden lg:block">
+              <TooltipProvider>
+                <Tooltip>
+                  <TooltipTrigger asChild>
+                    <Button
+                      variant="ghost"
+                      size="icon"
+                      type="button"
+                      onClick={async () =>
+                        setInput(await navigator.clipboard.readText())
+                      }
+                    >
+                      <ClipboardPaste />
+                    </Button>
+                  </TooltipTrigger>
+                  <TooltipContent>
+                    <p>Paste URL from clipboard</p>
+                  </TooltipContent>
+                </Tooltip>
+              </TooltipProvider>
+            </div>
 
-          <Input
-            name="url"
-            type="url"
-            placeholder="https://example.com"
-            required
-            value={input}
-            onChange={(e) => setInput(e.target.value)}
-          />
+            <Input
+              name="url"
+              type="url"
+              placeholder="https://example.com"
+              required
+              value={input}
+              onChange={(e) => setInput(e.target.value)}
+            />
+          </div>
+
+          <SubmitButton />
         </div>
+      ) : (
+        <div className="flex gap-1">
+          <div
+            className="flex gap-2 cursor-pointer w-full items-center"
+            onClick={() => {
+              navigator.clipboard.writeText(
+                `${window.location.origin}/r/${state.url}`
+              );
+              toast.info('Quick Link copied!');
+            }}
+          >
+            <span
+              className={buttonVariants({ variant: 'ghost', size: 'icon' })}
+            >
+              <ClipboardCopy />
+            </span>
+            <Input
+              readOnly
+              value={`${window.location.origin}/r/${state.url}`}
+              className="cursor-pointer bg-secondary/30"
+            />
+          </div>
 
-        <SubmitButton />
-      </div>
+          <Button
+            type="button"
+            variant="secondary"
+            onClick={() => {
+              state.url = null;
+              setInput('');
+            }}
+          >
+            Shorten more
+          </Button>
+        </div>
+      )}
 
       <p className="text-foreground/75 text-sm">
-        The created URL will only be available for 1 week
+        This demo Quick Link will only be available for 1 week
       </p>
     </form>
   );
