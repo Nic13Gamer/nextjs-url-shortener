@@ -11,12 +11,12 @@ import {
   TooltipTrigger,
 } from '../ui/tooltip';
 import { useFormState, useFormStatus } from 'react-dom';
-import { createDemoShortUrl } from '@/actions';
+import { generateDemoShortUrl } from '@/actions';
 import { toast } from 'sonner';
 
 const initialState = {
   message: null,
-  shortUrl: null,
+  url: null,
 };
 
 function SubmitButton() {
@@ -33,7 +33,7 @@ function SubmitButton() {
 export default function DemoShortenForm() {
   const [input, setInput] = useState('');
   const [state, formAction] = useFormState<any, FormData>(
-    createDemoShortUrl,
+    generateDemoShortUrl,
     initialState
   );
 
@@ -129,7 +129,8 @@ export default function DemoShortenForm() {
       )}
 
       <p className="text-foreground/75 text-sm">
-        This demo Quick Link will only be available for 1 week
+        This demo QuickLink will only be available for 1 week. Users can use
+        custom names for QuickLinks.
       </p>
     </form>
   );

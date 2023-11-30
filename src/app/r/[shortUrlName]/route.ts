@@ -3,11 +3,11 @@ import { redirect } from 'next/navigation';
 
 export async function GET(
   req: Request,
-  { params }: { params: { shortUrl: string } }
+  { params }: { params: { shortUrlName: string } }
 ) {
   const shortUrl = await prisma.shortUrl.findUnique({
     where: {
-      name: params.shortUrl,
+      name: params.shortUrlName,
     },
   });
 
