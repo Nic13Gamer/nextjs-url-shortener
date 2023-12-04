@@ -16,15 +16,18 @@ export async function GET(
   }
 
   if (shortUrl.expiresAt && Date.now() > shortUrl.expiresAt.getTime()) {
-    await prisma.shortUrl.delete({ where: { id: shortUrl.id } });
-
     redirect('/404');
   }
 
   // TODO: analytics logic
 
-  new Promise(() => {
-    // analytics logic here to not slow down redirect
+  new Promise(async () => {
+    // analytics logic here so redirect does not get slowed
+
+    await prisma.shortUrl.update({
+      where: shortUrl,
+      data: { uses: { increment: 1 } },
+    });
   });
 
   redirect(shortUrl.destination);

@@ -70,7 +70,7 @@ export default function ShortenUrlForm() {
   return (
     <form
       action={formAction}
-      className="border-2 rounded-md p-2 flex flex-col gap-2 lg:w-[40%]"
+      className="border-2 rounded-md p-2 flex flex-col gap-2"
     >
       <h1 className="text-xl text-center font-semibold">New QuickLink</h1>
 

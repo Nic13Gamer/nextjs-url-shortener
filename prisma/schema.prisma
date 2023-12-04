@@ -67,6 +67,7 @@ model ShortUrl {
   name        String    @unique
   destination String
   expiresAt   DateTime?
+  uses        Int       @default(0)
 
   userId String?
   user   User?   @relation(fields: [userId], references: [id])
