@@ -1,26 +1,20 @@
-import prisma from '@/db';
+import { fetchStatCardsData } from '@/lib/short-url';
 import { User } from '@prisma/client';
 
 export default async function StatsCards({ user }: { user: User }) {
-  await new Promise((r) => setTimeout(r, 3000));
-
-  const shortUrlCount = await prisma.shortUrl.count({
-    where: { userId: user.id },
-  });
-  const expiredShortUrlCount = await prisma.shortUrl.count({
-    where: { userId: user.id, expiresAt: { lt: new Date(Date.now()) } },
-  });
-  const totalShortUrlUses = await prisma.shortUrl.aggregate({
-    where: { userId: user.id },
-    _sum: { uses: true },
-  });
+  const [
+    shortUrlCount,
+    expiredShortUrlCount,
+    activeShortUrlCount,
+    totalShortUrlUses,
+  ] = await fetchStatCardsData(user.id);
 
   return (
     <div className="grid grid-cols-2 gap-6 w-full">
-      <Card title="QuickLinks created" data={shortUrlCount} />
+      <Card title="Created QuickLinks" data={shortUrlCount} />
+      <Card title="Active QuickLinks" data={activeShortUrlCount} />
       <Card title="Total link uses" data={totalShortUrlUses._sum.uses ?? 0} />
       <Card title="Expired QuickLinks" data={expiredShortUrlCount} />
-      <Card title="PLACEHOLDER" data="0" />
     </div>
   );
 }

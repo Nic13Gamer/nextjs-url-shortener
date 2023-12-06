@@ -15,7 +15,10 @@ export async function GET(
     redirect('/404');
   }
 
-  if (shortUrl.expiresAt && Date.now() > shortUrl.expiresAt.getTime()) {
+  if (
+    (shortUrl.expiresAt && Date.now() > shortUrl.expiresAt.getTime()) ||
+    !shortUrl.active
+  ) {
     redirect('/404');
   }
 

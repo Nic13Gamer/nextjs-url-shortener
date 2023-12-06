@@ -66,6 +66,7 @@ model ShortUrl {
 
   name        String    @unique
   destination String
+  active      Boolean   @default(true)
   expiresAt   DateTime?
   uses        Int       @default(0)
 

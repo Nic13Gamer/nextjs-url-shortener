@@ -52,3 +52,32 @@ export async function createShortUrl({
 
   return createdShortUrl.name;
 }
+
+export async function fetchStatCardsData(userId: string) {
+  const shortUrlCount = await prisma.shortUrl.count({
+    where: { userId },
+  });
+  const expiredShortUrlCount = await prisma.shortUrl.count({
+    where: { userId, expiresAt: { lt: new Date(Date.now()) } },
+  });
+  const activeShortUrlCount = await prisma.shortUrl.count({
+    where: {
+      userId,
+      OR: [{ expiresAt: { gt: new Date(Date.now()) } }, { expiresAt: null }],
+      active: true,
+    },
+  });
+  const totalShortUrlUses = await prisma.shortUrl.aggregate({
+    where: { userId },
+    _sum: { uses: true },
+  });
+
+  const data = await Promise.all([
+    shortUrlCount,
+    expiredShortUrlCount,
+    activeShortUrlCount,
+    totalShortUrlUses,
+  ]);
+
+  return data;
+}

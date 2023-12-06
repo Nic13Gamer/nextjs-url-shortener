@@ -5,6 +5,7 @@ import { createShortUrl } from './lib/short-url';
 import { auth } from './auth';
 import { getUserBySession } from './lib/utils';
 import prisma from './db';
+import { revalidatePath } from 'next/cache';
 
 export async function generateDemoShortUrl(prevState: any, data: FormData) {
   const urlSchema = z.string().url();
@@ -70,6 +71,7 @@ export async function generateShortUrl(prevState: any, data: FormData) {
       userId: user?.id,
     });
 
+    revalidatePath('/dashboard');
     return { message: '', url: shortUrl };
   } catch (error) {
     return { message: 'Server error. Please try again' };
