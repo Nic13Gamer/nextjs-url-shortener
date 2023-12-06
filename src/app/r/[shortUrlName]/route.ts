@@ -22,14 +22,13 @@ export async function GET(
     redirect('/404');
   }
 
-  // TODO: analytics logic
-
   new Promise(async () => {
     // analytics logic here so redirect does not get slowed
 
-    await prisma.shortUrl.update({
-      where: shortUrl,
-      data: { uses: { increment: 1 } },
+    await prisma.shortUrlUse.create({
+      data: {
+        shortUrlId: shortUrl.id,
+      },
     });
   });
 

@@ -13,7 +13,7 @@ export default async function StatsCards({ user }: { user: User }) {
     <div className="grid grid-cols-2 gap-6 w-full">
       <Card title="Created QuickLinks" data={shortUrlCount} />
       <Card title="Active QuickLinks" data={activeShortUrlCount} />
-      <Card title="Total link uses" data={totalShortUrlUses._sum.uses ?? 0} />
+      <Card title="Total link uses" data={totalShortUrlUses} />
       <Card title="Expired QuickLinks" data={expiredShortUrlCount} />
     </div>
   );

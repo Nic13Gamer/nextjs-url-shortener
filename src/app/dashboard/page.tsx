@@ -11,7 +11,6 @@ export default async function Page() {
 
   if (!user) return null;
 
-  // TODO: cards next to shortenUrlForm to display basic data, as urls created and more
   // TODO: created quicklinks table and page to display stats and edit quicklink
 
   return (
@@ -21,7 +20,7 @@ export default async function Page() {
         <h2 className="text-2xl text-center">Welcome, {user.name}!</h2>
       </header>
 
-      <div className="flex xl:flex-row flex-col justify-between gap-10">
+      <div className="flex lg:flex-row flex-col justify-between gap-10">
         <div className="shrink-0 lg:w-[50%]">
           <ShortenUrlForm />
         </div>

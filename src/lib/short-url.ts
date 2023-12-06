@@ -67,9 +67,8 @@ export async function fetchStatCardsData(userId: string) {
       active: true,
     },
   });
-  const totalShortUrlUses = await prisma.shortUrl.aggregate({
-    where: { userId },
-    _sum: { uses: true },
+  const totalShortUrlUses = await prisma.shortUrlUse.count({
+    where: { shortUrl: { userId } },
   });
 
   const data = await Promise.all([

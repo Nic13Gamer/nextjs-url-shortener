@@ -64,14 +64,24 @@ model User {
 model ShortUrl {
   id String @id @default(cuid())
 
-  name        String    @unique
+  name        String        @unique
   destination String
-  active      Boolean   @default(true)
+  active      Boolean       @default(true)
   expiresAt   DateTime?
-  uses        Int       @default(0)
+  uses        ShortUrlUse[]
 
   userId String?
-  user   User?   @relation(fields: [userId], references: [id])
+  user   User?   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  updatedAt DateTime @updatedAt
+  createdAt DateTime @default(now())
+}
+
+model ShortUrlUse {
+  id String @id @default(cuid())
+
+  shortUrlId String
+  shortUrl   ShortUrl @relation(fields: [shortUrlId], references: [id], onDelete: Cascade)
 
   createdAt DateTime @default(now())
 }
