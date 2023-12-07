@@ -10,7 +10,7 @@ export default async function StatsCards({ user }: { user: User }) {
   ] = await fetchStatCardsData(user.id);
 
   return (
-    <div className="grid grid-cols-2 gap-6 w-full">
+    <div className="grid w-full grid-cols-2 gap-6">
       <Card title="Created QuickLinks" data={shortUrlCount} />
       <Card title="Active QuickLinks" data={activeShortUrlCount} />
       <Card title="Total link uses" data={totalShortUrlUses} />
@@ -26,10 +26,10 @@ type CardProps = {
 
 function Card({ title, data }: CardProps) {
   return (
-    <div className="border-2 p-2 rounded-md h-full bg-secondary/20 flex flex-col justify-between gap-1">
+    <div className="flex h-full flex-col justify-between gap-1 rounded-md border-2 bg-secondary/20 p-2">
       <h1 className="text-center text-xl font-semibold">{title}</h1>
 
-      <p className="lg:text-7xl text-4xl font-extralight text-center mb-5">
+      <p className="mb-5 text-center text-4xl font-extralight lg:text-7xl">
         {data}
       </p>
     </div>

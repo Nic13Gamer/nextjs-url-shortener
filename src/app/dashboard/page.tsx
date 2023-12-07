@@ -15,12 +15,12 @@ export default async function Page() {
 
   return (
     <div className="container">
-      <header className="flex flex-col gap-1 mt-7 mb-10">
-        <h1 className="text-5xl text-center font-bold">QuickLink Dashboard</h1>
-        <h2 className="text-2xl text-center">Welcome, {user.name}!</h2>
+      <header className="mb-10 mt-7 flex flex-col gap-1">
+        <h1 className="text-center text-5xl font-bold">QuickLink Dashboard</h1>
+        <h2 className="text-center text-2xl">Welcome, {user.name}!</h2>
       </header>
 
-      <div className="flex lg:flex-row flex-col justify-between gap-10">
+      <div className="flex flex-col justify-between gap-10 lg:flex-row">
         <div className="shrink-0 lg:w-[50%]">
           <ShortenUrlForm />
         </div>

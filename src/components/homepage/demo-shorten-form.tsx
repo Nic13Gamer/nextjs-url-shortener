@@ -51,13 +51,13 @@ export default function DemoShortenForm() {
   return (
     <form
       action={formAction}
-      className="border-2 rounded-md p-2 flex flex-col gap-2"
+      className="flex flex-col gap-2 rounded-md border-2 p-2"
     >
-      <h1 className="text-3xl text-center font-semibold">Try it</h1>
+      <h1 className="text-center text-3xl font-semibold">Try it</h1>
 
       {!state.url ? (
         <div className="flex gap-1">
-          <div className="flex gap-2 w-full items-center">
+          <div className="flex w-full items-center gap-2">
             <div className="hidden lg:block">
               <TooltipProvider>
                 <Tooltip>
@@ -95,7 +95,7 @@ export default function DemoShortenForm() {
       ) : (
         <div className="flex gap-1">
           <div
-            className="flex gap-2 cursor-pointer w-full items-center"
+            className="flex w-full cursor-pointer items-center gap-2"
             onClick={() => {
               navigator.clipboard.writeText(
                 `${window.location.origin}/r/${state.url}`
@@ -128,7 +128,7 @@ export default function DemoShortenForm() {
         </div>
       )}
 
-      <p className="text-foreground/75 text-sm">
+      <p className="text-sm text-foreground/75">
         This demo QuickLink will only be available for 1 week. Users can use
         custom names for QuickLinks.
       </p>

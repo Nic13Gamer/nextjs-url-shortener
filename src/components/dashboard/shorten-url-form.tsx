@@ -70,11 +70,11 @@ export default function ShortenUrlForm() {
   return (
     <form
       action={formAction}
-      className="border-2 rounded-md p-2 flex flex-col gap-2"
+      className="flex flex-col gap-2 rounded-md border-2 p-2"
     >
-      <h1 className="text-xl text-center font-semibold">New QuickLink</h1>
+      <h1 className="text-center text-xl font-semibold">New QuickLink</h1>
 
-      <div className="flex gap-2 items-center">
+      <div className="flex items-center gap-2">
         <div className="hidden lg:block">
           <TooltipProvider>
             <Tooltip>
@@ -109,7 +109,7 @@ export default function ShortenUrlForm() {
 
       <Separator className="mt-2" />
 
-      <p className="px-2 my-1 font-semibold">Options</p>
+      <p className="my-1 px-2 font-semibold">Options</p>
 
       <div className="flex flex-col gap-3 px-2">
         <Input
@@ -122,8 +122,8 @@ export default function ShortenUrlForm() {
           onChange={(e) => setCustomNameInput(e.target.value)}
         />
 
-        <div className="flex gap-5 justify-between items-center bg-secondary/30 px-2 py-1 rounded-lg">
-          <div className="flex items-center space-x-2 shrink-0">
+        <div className="flex items-center justify-between gap-5 rounded-lg bg-secondary/30 px-2 py-1">
+          <div className="flex shrink-0 items-center space-x-2">
             <Checkbox
               id="expirationDateSelect"
               checked={urlExpiresSelect}
