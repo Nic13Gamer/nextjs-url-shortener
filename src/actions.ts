@@ -77,3 +77,49 @@ export async function generateShortUrl(prevState: any, data: FormData) {
     return { message: 'Server error. Please try again' };
   }
 }
+
+export async function toggleShortUrlActive({
+  active,
+  shortUrlId,
+}: {
+  active: boolean;
+  shortUrlId: string;
+}) {
+  const session = await auth();
+  const user = await getUserBySession(session);
+
+  const dataSchema = z.object({
+    active: z.boolean(),
+    shortUrlId: z.string(),
+  });
+  const dataResult = dataSchema.safeParse({ active, shortUrlId });
+
+  if (!dataResult.success) {
+    return { message: 'Invalid input' };
+  }
+
+  const shortUrl = await prisma.shortUrl.findUnique({
+    where: { id: shortUrlId },
+  });
+  if (!shortUrl) {
+    return { message: 'Invalid input' };
+  }
+
+  if (!user || shortUrl.userId !== user.id) {
+    return { message: 'Invalid session' };
+  }
+
+  try {
+    await prisma.shortUrl.update({
+      where: { id: shortUrlId },
+      data: { active },
+    });
+
+    revalidatePath('/dashboard');
+    return { message: '' };
+  } catch (error) {
+    if (!dataResult.success) {
+      return { message: 'An error occurred' };
+    }
+  }
+}

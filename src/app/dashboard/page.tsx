@@ -2,6 +2,7 @@ import { auth } from '@/auth';
 import ShortenUrlForm from '@/components/dashboard/shorten-url-form';
 import StatsCards from '@/components/dashboard/stats-cards';
 import StatsCardsSkeleton from '@/components/dashboard/stats-cards-skeleton';
+import UrlTable from '@/components/dashboard/url-table';
 import { getUserBySession } from '@/lib/utils';
 import { Suspense } from 'react';
 
@@ -11,11 +12,9 @@ export default async function Page() {
 
   if (!user) return null;
 
-  // TODO: created quicklinks table and page to display stats and edit quicklink
-
   return (
-    <div className="container">
-      <header className="mb-10 mt-7 flex flex-col gap-1">
+    <div className="container flex flex-col gap-10">
+      <header className="mt-7 flex flex-col gap-1">
         <h1 className="text-center text-5xl font-bold">QuickLink Dashboard</h1>
         <h2 className="text-center text-2xl">Welcome, {user.name}!</h2>
       </header>
@@ -29,6 +28,10 @@ export default async function Page() {
           <StatsCards user={user} />
         </Suspense>
       </div>
+
+      <Suspense>
+        <UrlTable user={user} />
+      </Suspense>
     </div>
   );
 }
