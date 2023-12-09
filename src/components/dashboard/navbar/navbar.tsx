@@ -1,4 +1,6 @@
 import Link from 'next/link';
+import { buttonVariants } from '../../ui/button';
+import SignOutButton from './signout-button';
 
 export default function Navbar() {
   return (
@@ -7,6 +9,17 @@ export default function Navbar() {
         <Link href="/dashboard" className="text-2xl font-bold lg:text-3xl">
           QuickLink
         </Link>
+
+        <div className="flex items-center gap-2">
+          <Link
+            href="/"
+            className={buttonVariants({ variant: 'ghost', size: 'sm' })}
+          >
+            Overview
+          </Link>
+
+          <SignOutButton />
+        </div>
       </div>
     </nav>
   );

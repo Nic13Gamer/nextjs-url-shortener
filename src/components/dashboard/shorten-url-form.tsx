@@ -109,7 +109,7 @@ export default function ShortenUrlForm() {
 
       <Separator className="mt-2" />
 
-      <p className="my-1 px-2 font-semibold">Options</p>
+      <p className="my-1 px-2 text-center font-medium">Advanced options</p>
 
       <div className="flex flex-col gap-3 px-2">
         <Input
@@ -148,7 +148,7 @@ export default function ShortenUrlForm() {
                 {urlExpirationDate ? (
                   format(urlExpirationDate, 'PPP')
                 ) : (
-                  <span>Pick a date</span>
+                  <span>Expiration date</span>
                 )}
               </Button>
             </PopoverTrigger>
