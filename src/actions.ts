@@ -3,7 +3,7 @@
 import { z } from 'zod';
 import { createShortUrl } from './lib/short-url';
 import { auth } from './auth';
-import { getUserBySession } from './lib/utils';
+import { getUser } from './lib/utils';
 import prisma from './db';
 import { revalidatePath } from 'next/cache';
 
@@ -34,7 +34,7 @@ export async function generateDemoShortUrl(prevState: any, data: FormData) {
 
 export async function generateShortUrl(prevState: any, data: FormData) {
   const session = await auth();
-  const user = await getUserBySession(session);
+  const user = await getUser(session);
 
   const formSchema = z.object({
     customName: z.string().max(24).trim(),
@@ -86,7 +86,11 @@ export async function toggleShortUrlActive({
   shortUrlId: string;
 }) {
   const session = await auth();
-  const user = await getUserBySession(session);
+  const user = await getUser(session);
+
+  if (!session || !user) {
+    return { message: 'Invalid session' };
+  }
 
   const dataSchema = z.object({
     active: z.boolean(),
@@ -105,8 +109,8 @@ export async function toggleShortUrlActive({
     return { message: 'Invalid input' };
   }
 
-  if (!user || shortUrl.userId !== user.id) {
-    return { message: 'Invalid session' };
+  if (shortUrl.userId !== user.id) {
+    return { message: 'You are not the short url creator' };
   }
 
   try {

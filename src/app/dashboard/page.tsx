@@ -3,12 +3,12 @@ import ShortenUrlForm from '@/components/dashboard/shorten-url-form';
 import StatsCards from '@/components/dashboard/stats-cards';
 import StatsCardsSkeleton from '@/components/dashboard/stats-cards-skeleton';
 import UrlTable from '@/components/dashboard/url-table';
-import { getUserBySession } from '@/lib/utils';
+import { getUser } from '@/lib/utils';
 import { Suspense } from 'react';
 
 export default async function Page() {
   const session = await auth();
-  const user = await getUserBySession(session);
+  const user = await getUser(session);
 
   if (!user) return null;
 
