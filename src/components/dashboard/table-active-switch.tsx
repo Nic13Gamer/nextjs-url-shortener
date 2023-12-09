@@ -8,11 +8,13 @@ import { toast } from 'sonner';
 type TableActiveSwitchProps = {
   initialCheck: boolean;
   shortUrlId: string;
+  expired: boolean;
 };
 
 export function TableActiveSwitch({
   initialCheck,
   shortUrlId,
+  expired,
 }: TableActiveSwitchProps) {
   const [checked, setChecked] = useState(initialCheck);
 
@@ -31,8 +33,9 @@ export function TableActiveSwitch({
 
   return (
     <Switch
-      checked={checked}
+      checked={expired ? false : checked}
       onCheckedChange={(e) => setChecked(e.valueOf())}
+      disabled={expired}
     />
   );
 }

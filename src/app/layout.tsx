@@ -24,13 +24,13 @@ export default function RootLayout({
     <html lang="en" className="dark">
       <body
         className={cn(
-          'min-h-screen bg-background font-sans antialiased',
+          'min-h-screen overflow-y-auto overflow-x-hidden bg-background font-sans antialiased',
           fontSans.variable
         )}
       >
         <Toaster richColors expand={true} />
 
-        <main>{children}</main>
+        <main className="mb-5">{children}</main>
       </body>
     </html>
   );
