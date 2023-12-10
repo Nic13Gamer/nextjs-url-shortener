@@ -33,13 +33,19 @@ npm install
 
 3. Configure the environment variables in a `.env` file according to the `.env.example` file.
 
-4. Run the development server:
+4. Prepare the PostgreSQL database with Prisma:
+
+```bash
+npx prisma db push
+```
+
+5. Run the development server:
 
 ```bash
 npm run dev
 ```
 
-5. Open [http://localhost:3000](http://localhost:3000) in your browser to explore the website.
+6. Open [http://localhost:3000](http://localhost:3000) in your browser to explore the website.
 
 ## License
 
