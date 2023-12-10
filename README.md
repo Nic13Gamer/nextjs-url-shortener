@@ -2,6 +2,8 @@
 
 This project allows you to shorten long URLs and transform them into short URLs. It is made with [Next.js](https://nextjs.org/).
 
+If you like or learn something new with this project, please consider giving it a star.
+
 ## Features
 
 - **URL Shortening:** Easily shorten long URLs to create compact links.
