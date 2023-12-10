@@ -13,7 +13,7 @@ export default async function Page() {
   if (!user) return null;
 
   return (
-    <div className="container flex flex-col gap-10">
+    <div className="container flex flex-col gap-6">
       <header className="mt-7 flex flex-col gap-1">
         <h1 className="text-center text-5xl font-bold">QuickLink Dashboard</h1>
         <h2 className="text-center text-2xl">Welcome, {user.name}!</h2>
