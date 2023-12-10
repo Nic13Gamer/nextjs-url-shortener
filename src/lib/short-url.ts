@@ -54,20 +54,20 @@ export async function createShortUrl({
 }
 
 export async function fetchStatCardsData(userId: string) {
-  const shortUrlCount = await prisma.shortUrl.count({
+  const shortUrlCount = prisma.shortUrl.count({
     where: { userId },
   });
-  const expiredShortUrlCount = await prisma.shortUrl.count({
+  const expiredShortUrlCount = prisma.shortUrl.count({
     where: { userId, expiresAt: { lt: new Date(Date.now()) } },
   });
-  const activeShortUrlCount = await prisma.shortUrl.count({
+  const activeShortUrlCount = prisma.shortUrl.count({
     where: {
       userId,
       OR: [{ expiresAt: { gt: new Date(Date.now()) } }, { expiresAt: null }],
       active: true,
     },
   });
-  const totalShortUrlUses = await prisma.shortUrlUse.count({
+  const totalShortUrlUses = prisma.shortUrlUse.count({
     where: { shortUrl: { userId } },
   });
 
