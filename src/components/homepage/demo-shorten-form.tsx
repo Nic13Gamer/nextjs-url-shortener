@@ -4,15 +4,10 @@ import { useEffect, useState } from 'react';
 import { Button, buttonVariants } from '../ui/button';
 import { Input } from '../ui/input';
 import { ClipboardCopy, ClipboardPaste, Loader2 } from 'lucide-react';
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from '../ui/tooltip';
 import { useFormState, useFormStatus } from 'react-dom';
 import { generateDemoShortUrl } from '@/actions';
 import { toast } from 'sonner';
+import ButtonTooltip from '../helpers/button-tooltip';
 
 const initialState = {
   message: null,
@@ -59,25 +54,18 @@ export default function DemoShortenForm() {
         <div className="flex gap-1">
           <div className="flex w-full items-center gap-2">
             <div className="hidden lg:block">
-              <TooltipProvider>
-                <Tooltip>
-                  <TooltipTrigger asChild>
-                    <Button
-                      variant="ghost"
-                      size="icon"
-                      type="button"
-                      onClick={async () =>
-                        setInput(await navigator.clipboard.readText())
-                      }
-                    >
-                      <ClipboardPaste />
-                    </Button>
-                  </TooltipTrigger>
-                  <TooltipContent>
-                    <p>Paste URL from clipboard</p>
-                  </TooltipContent>
-                </Tooltip>
-              </TooltipProvider>
+              <ButtonTooltip info="Paste URL from clipboard">
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  type="button"
+                  onClick={async () =>
+                    setInput(await navigator.clipboard.readText())
+                  }
+                >
+                  <ClipboardPaste />
+                </Button>
+              </ButtonTooltip>
             </div>
 
             <Input

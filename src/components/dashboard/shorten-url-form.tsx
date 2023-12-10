@@ -4,12 +4,6 @@ import { useEffect, useState } from 'react';
 import { Button } from '../ui/button';
 import { Input } from '../ui/input';
 import { CalendarIcon, ClipboardPaste, Loader2 } from 'lucide-react';
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from '../ui/tooltip';
 import { useFormState, useFormStatus } from 'react-dom';
 import { generateShortUrl } from '@/actions';
 import { toast } from 'sonner';
@@ -20,6 +14,7 @@ import { format } from 'date-fns';
 import { cn } from '@/lib/utils';
 import { Popover, PopoverContent, PopoverTrigger } from '../ui/popover';
 import { Calendar } from '../ui/calendar';
+import ButtonTooltip from '../helpers/button-tooltip';
 
 const initialState = {
   message: null,
@@ -76,25 +71,18 @@ export default function ShortenUrlForm() {
 
       <div className="flex items-center gap-2">
         <div className="hidden lg:block">
-          <TooltipProvider>
-            <Tooltip>
-              <TooltipTrigger asChild>
-                <Button
-                  variant="ghost"
-                  size="icon"
-                  type="button"
-                  onClick={async () =>
-                    setUrlInput(await navigator.clipboard.readText())
-                  }
-                >
-                  <ClipboardPaste />
-                </Button>
-              </TooltipTrigger>
-              <TooltipContent>
-                <p>Paste URL from clipboard</p>
-              </TooltipContent>
-            </Tooltip>
-          </TooltipProvider>
+          <ButtonTooltip info="Paste URL from clipboard">
+            <Button
+              variant="ghost"
+              size="icon"
+              type="button"
+              onClick={async () =>
+                setUrlInput(await navigator.clipboard.readText())
+              }
+            >
+              <ClipboardPaste />
+            </Button>
+          </ButtonTooltip>
         </div>
 
         <Input
