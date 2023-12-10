@@ -15,7 +15,6 @@ export default async function Page({ params }: { params: { id: string } }) {
   if (!user || !shortUrl || shortUrl.userId !== user.id) {
     notFound();
   }
-  // TODO: protect page to only the short url author!!
 
   return (
     <div className="container mt-7 rounded-md border-2 p-2">
