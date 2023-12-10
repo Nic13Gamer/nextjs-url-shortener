@@ -49,7 +49,7 @@ export default async function UrlTable({ user }: { user: User }) {
           {shortUrls.length === 0 && (
             <TableFooter>
               <TableRow>
-                <TableCell className="text-center" colSpan={4}>
+                <TableCell className="text-center" colSpan={5}>
                   You have not created any QuickLinks yet!
                 </TableCell>
               </TableRow>
