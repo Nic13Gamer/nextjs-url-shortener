@@ -1,7 +1,7 @@
 'use server';
 
 import { z } from 'zod';
-import { createShortUrl } from './lib/short-url';
+import { createShortUrl } from './lib/shortUrl';
 import { auth } from './auth';
 import { getUser } from './lib/utils';
 import prisma from './db';

@@ -1,4 +1,4 @@
-import { fetchStatCardsData } from '@/lib/short-url';
+import { fetchStatCardsData } from '@/lib/shortUrl';
 import { User } from '@prisma/client';
 
 export default async function StatsCards({ user }: { user: User }) {
