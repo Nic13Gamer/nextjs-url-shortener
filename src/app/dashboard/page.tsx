@@ -19,7 +19,7 @@ export default async function Page() {
         <h2 className="text-center text-2xl">Welcome, {user.name}!</h2>
       </header>
 
-      <div className="flex flex-col justify-between gap-10 lg:flex-row">
+      <div className="flex flex-col justify-between gap-6 lg:flex-row">
         <div className="shrink-0 lg:w-[50%]">
           <ShortenUrlForm />
         </div>
