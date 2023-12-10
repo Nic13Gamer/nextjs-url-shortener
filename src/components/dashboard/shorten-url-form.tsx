@@ -111,7 +111,7 @@ export default function ShortenUrlForm() {
 
       <p className="my-1 px-2 text-center font-medium">Advanced options</p>
 
-      <div className="flex flex-col gap-3 px-2">
+      <div className="flex flex-col gap-3">
         <Input
           name="customName"
           type="text"
@@ -122,7 +122,7 @@ export default function ShortenUrlForm() {
           onChange={(e) => setCustomNameInput(e.target.value)}
         />
 
-        <div className="flex items-center justify-between gap-5 rounded-lg bg-secondary/30 px-2 py-1">
+        <div className="flex items-center justify-between gap-5 rounded-lg bg-secondary/20 px-2 py-1">
           <div className="flex shrink-0 items-center space-x-2">
             <Checkbox
               id="expirationDateSelect"

@@ -11,7 +11,8 @@ export default function SignOutButton() {
       size="sm"
       onClick={() => signOut({ callbackUrl: '/' })}
     >
-      <LogOut className="mr-2 h-4 w-4" /> Sign out
+      <LogOut className="mr-2 h-4 w-4" />
+      Sign out
     </Button>
   );
 }

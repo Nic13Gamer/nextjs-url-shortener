@@ -28,7 +28,7 @@ export default function RootLayout({
           fontSans.variable
         )}
       >
-        <Toaster richColors expand={true} />
+        <Toaster richColors expand={true} duration={3000} closeButton />
 
         <main className="mb-5">{children}</main>
       </body>

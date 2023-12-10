@@ -12,7 +12,7 @@ export default function Navbar() {
 
         <div className="flex items-center gap-2">
           <Link
-            href="/"
+            href="/dashboard"
             className={buttonVariants({ variant: 'ghost', size: 'sm' })}
           >
             Overview
