@@ -1,11 +1,10 @@
 import { ShortUrl } from '@prisma/client';
 import { TableCell, TableRow } from '../ui/table';
 import { cn } from '@/lib/utils';
-import { TableActiveSwitch } from './table-active-switch';
 import Link from 'next/link';
 import { buttonVariants } from '../ui/button';
 import { BarChartBig } from 'lucide-react';
-import UrlTableCopyButton from './url-table-copy-button';
+import { UrlTableActiveSwitch, UrlTableCopyButton } from './url-table-buttons';
 
 const EXPIRED_CLASSNAME = 'opacity-50';
 const SWITCH_EXPIRED_CLASSNAME = 'dark:opacity-80';
@@ -41,7 +40,7 @@ export default function UrlTableRow({ url }: { url: ShortUrl }) {
       </TableCell>
 
       <TableCell className={cn(isExpired(url) && SWITCH_EXPIRED_CLASSNAME)}>
-        <TableActiveSwitch
+        <UrlTableActiveSwitch
           initialCheck={url.active}
           shortUrlId={url.id}
           expired={isExpired(url)}
