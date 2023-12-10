@@ -2,11 +2,11 @@
 
 import { ShortUrl } from '@prisma/client';
 import { Button } from '../ui/button';
-import { ClipboardCopy } from 'lucide-react';
+import { ClipboardCopy, Loader2, Trash2 } from 'lucide-react';
 import { toast } from 'sonner';
 import { cn } from '@/lib/utils';
 import { Switch } from '../ui/switch';
-import { toggleShortUrlActive } from '@/actions';
+import { deleteShortUrl, toggleShortUrlActive } from '@/actions';
 import { useEffect, useState } from 'react';
 
 export function UrlTableCopyButton({ url }: { url: ShortUrl }) {
@@ -28,6 +28,34 @@ export function UrlTableCopyButton({ url }: { url: ShortUrl }) {
     >
       <ClipboardCopy className="mr-2 h-4 w-4" />
       Copy
+    </Button>
+  );
+}
+
+export function UrlTableDeleteButton({ url }: { url: ShortUrl }) {
+  const [clicked, setClicked] = useState(false);
+
+  async function buttonClick() {
+    setClicked(true);
+
+    const result = await deleteShortUrl(url.id);
+    if (result.message) {
+      toast.error(result.message);
+    }
+  }
+
+  return (
+    <Button
+      variant="destructive"
+      size="sm"
+      disabled={clicked}
+      onClick={buttonClick}
+    >
+      {!clicked ? (
+        <Trash2 className="h-4 w-4" />
+      ) : (
+        <Loader2 className="h-4 w-4 animate-spin" />
+      )}
     </Button>
   );
 }
@@ -66,4 +94,3 @@ export function UrlTableActiveSwitch({
     />
   );
 }
-

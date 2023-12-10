@@ -4,7 +4,11 @@ import { cn } from '@/lib/utils';
 import Link from 'next/link';
 import { buttonVariants } from '../ui/button';
 import { BarChartBig } from 'lucide-react';
-import { UrlTableActiveSwitch, UrlTableCopyButton } from './url-table-buttons';
+import {
+  UrlTableActiveSwitch,
+  UrlTableCopyButton,
+  UrlTableDeleteButton,
+} from './url-table-buttons';
 
 const EXPIRED_CLASSNAME = 'opacity-50';
 const SWITCH_EXPIRED_CLASSNAME = 'dark:opacity-80';
@@ -63,6 +67,8 @@ export default function UrlTableRow({ url }: { url: ShortUrl }) {
           <BarChartBig className="mr-2 h-4 w-4" />
           View
         </Link>
+
+        <UrlTableDeleteButton url={url} />
       </TableCell>
     </TableRow>
   );

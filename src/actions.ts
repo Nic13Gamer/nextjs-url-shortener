@@ -110,7 +110,7 @@ export async function toggleShortUrlActive({
   }
 
   if (shortUrl.userId !== user.id) {
-    return { message: 'You are not the short url creator' };
+    return { message: 'You are not the short url owner' };
   }
 
   try {
@@ -122,8 +122,38 @@ export async function toggleShortUrlActive({
     revalidatePath('/dashboard');
     return { message: '' };
   } catch (error) {
-    if (!dataResult.success) {
-      return { message: 'An error occurred' };
-    }
+    return { message: 'An error occurred' };
+  }
+}
+
+export async function deleteShortUrl(id: string) {
+  const session = await auth();
+  const user = await getUser(session);
+
+  if (!session || !user) {
+    return { message: 'Invalid session' };
+  }
+
+  const idSchema = z.string();
+  if (!idSchema.safeParse(id)) {
+    return { message: 'Invalid input' };
+  }
+
+  const shortUrl = await prisma.shortUrl.findUnique({ where: { id } });
+  if (!shortUrl) {
+    return { message: 'Invalid input' };
+  }
+
+  if (shortUrl.userId !== user.id) {
+    return { message: 'You are not the short url owner' };
+  }
+
+  try {
+    await prisma.shortUrl.delete({ where: { id } });
+
+    revalidatePath('/dashboard');
+    return { message: '' };
+  } catch (error) {
+    return { message: 'An error occurred' };
   }
 }
