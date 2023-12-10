@@ -8,6 +8,7 @@ import { cn } from '@/lib/utils';
 import { Switch } from '../ui/switch';
 import { deleteShortUrl, toggleShortUrlActive } from '@/actions';
 import { useEffect, useState } from 'react';
+import ButtonTooltip from '../helpers/button-tooltip';
 
 export function UrlTableCopyButton({ url }: { url: ShortUrl }) {
   function copy() {
@@ -45,18 +46,20 @@ export function UrlTableDeleteButton({ url }: { url: ShortUrl }) {
   }
 
   return (
-    <Button
-      variant="destructive"
-      size="sm"
-      disabled={clicked}
-      onClick={buttonClick}
-    >
-      {!clicked ? (
-        <Trash2 className="h-4 w-4" />
-      ) : (
-        <Loader2 className="h-4 w-4 animate-spin" />
-      )}
-    </Button>
+    <ButtonTooltip info="Delete this QuickLink">
+      <Button
+        variant="destructive"
+        size="sm"
+        disabled={clicked}
+        onClick={buttonClick}
+      >
+        {!clicked ? (
+          <Trash2 className="h-4 w-4" />
+        ) : (
+          <Loader2 className="h-4 w-4 animate-spin" />
+        )}
+      </Button>
+    </ButtonTooltip>
   );
 }
 
