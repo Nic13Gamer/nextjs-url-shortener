@@ -41,16 +41,20 @@ export async function createShortUrl({
     userId,
   });
 
-  const createdShortUrl = await prisma.shortUrl.create({
-    data: {
-      name: shortUrlData.name,
-      destination: shortUrlData.destination,
-      expiresAt: shortUrlData.expirationDate,
-      userId: shortUrlData.userId,
-    },
-  });
+  try {
+    const createdShortUrl = await prisma.shortUrl.create({
+      data: {
+        name: shortUrlData.name,
+        destination: shortUrlData.destination,
+        expiresAt: shortUrlData.expirationDate,
+        userId: shortUrlData.userId,
+      },
+    });
 
-  return createdShortUrl.name;
+    return createdShortUrl.name;
+  } catch (error) {
+    throw error;
+  }
 }
 
 export async function fetchStatCardsData(userId: string) {
