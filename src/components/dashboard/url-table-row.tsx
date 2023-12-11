@@ -58,7 +58,7 @@ export default function UrlTableRow({ url }: { url: ShortUrl }) {
       </TableCell>
 
       <TableCell className="flex gap-2 text-right">
-        <UrlTableCopyButton url={url} />
+        <UrlTableCopyButton url={url} expired={isExpired(url)} />
 
         <Link
           href={`/dashboard/view/${url.id}`}
