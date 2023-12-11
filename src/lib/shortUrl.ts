@@ -1,4 +1,5 @@
 import prisma from '@/db';
+import { ShortUrl } from '@prisma/client';
 import { generate as generateString } from 'randomstring';
 import { z } from 'zod';
 
@@ -83,4 +84,8 @@ export async function fetchStatCardsData(userId: string) {
   ]);
 
   return data;
+}
+
+export function isExpired(url: ShortUrl) {
+  return Boolean(url.expiresAt && Date.now() > url.expiresAt.getTime());
 }

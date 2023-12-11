@@ -9,13 +9,10 @@ import {
   UrlTableCopyButton,
   UrlTableDeleteButton,
 } from './url-table-buttons';
+import { isExpired } from '@/lib/shortUrl';
 
 const EXPIRED_CLASSNAME = 'opacity-50';
 const SWITCH_EXPIRED_CLASSNAME = 'dark:opacity-80';
-
-function isExpired(url: ShortUrl) {
-  return Boolean(url.expiresAt && Date.now() > url.expiresAt.getTime());
-}
 
 export default function UrlTableRow({ url }: { url: ShortUrl }) {
   return (
