@@ -26,13 +26,13 @@ export default async function Page({ params }: { params: { id: string } }) {
 
   return (
     <>
-      <div className="absolute flex h-full w-full flex-col justify-center px-2 md:hidden">
+      <div className="absolute flex h-full w-full flex-col justify-center px-2 sm:hidden">
         <div className="rounded-md border-2 p-2 text-center text-xl font-semibold">
           Please use landscape mode to view this page
         </div>
       </div>
 
-      <div className="container mt-7 hidden rounded-md border-2 p-2 md:block">
+      <div className="container mt-7 hidden rounded-md border-2 p-2 sm:block">
         <header className="mb-5 flex flex-col items-center justify-center gap-3">
           {(expired || !shortUrl.active) && (
             <div className="w-full rounded bg-destructive p-2 text-center text-xl">
@@ -75,7 +75,9 @@ export default async function Page({ params }: { params: { id: string } }) {
             <UrlUseChart url={shortUrl} />
           </Suspense>
 
-          <QRCodeCard url={shortUrl} />
+          <div className="hidden lg:block">
+            <QRCodeCard url={shortUrl} />
+          </div>
         </div>
       </div>
     </>

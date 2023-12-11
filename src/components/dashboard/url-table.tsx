@@ -20,11 +20,11 @@ export default async function UrlTable({ user }: { user: User }) {
 
   return (
     <div className="rounded-md border-2 p-2">
-      <h1 className="block text-center text-lg font-semibold md:hidden">
+      <h1 className="block text-center text-lg font-semibold sm:hidden">
         Please use landscape mode to view QuickLinks table
       </h1>
 
-      <div className="hidden md:block">
+      <div className="hidden sm:block">
         <Table>
           <TableCaption>Your created QuickLinks.</TableCaption>
           <TableHeader>
