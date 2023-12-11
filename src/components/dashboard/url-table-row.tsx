@@ -58,7 +58,7 @@ export default function UrlTableRow({ url }: { url: ShortUrl }) {
         <UrlTableCopyButton url={url} expired={isExpired(url)} />
 
         <Link
-          href={`/dashboard/view/${url.id}`}
+          href={`/dashboard/${url.id}`}
           className={buttonVariants({ variant: 'default', size: 'sm' })}
         >
           <BarChartBig className="mr-2 h-4 w-4" />
