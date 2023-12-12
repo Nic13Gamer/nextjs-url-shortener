@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { buttonVariants } from '../../ui/button';
 import SignOutButton from './signout-button';
+import ThemeToggle from '@/components/theme-toggle';
 
 export default function Navbar() {
   return (
@@ -19,6 +20,8 @@ export default function Navbar() {
           </Link>
 
           <SignOutButton />
+
+          <ThemeToggle />
         </div>
       </div>
     </nav>
