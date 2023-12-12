@@ -81,9 +81,11 @@ export async function generateShortUrl(prevState: any, data: FormData) {
 export async function toggleShortUrlActive({
   active,
   shortUrlId,
+  fromViewPage,
 }: {
   active: boolean;
   shortUrlId: string;
+  fromViewPage?: boolean;
 }) {
   const session = await auth();
   const user = await getUser(session);
@@ -119,7 +121,11 @@ export async function toggleShortUrlActive({
       data: { active },
     });
 
-    revalidatePath('/dashboard');
+    if (fromViewPage) {
+      revalidatePath('/dashboard/' + shortUrlId);
+    } else {
+      revalidatePath('/dashboard');
+    }
     return { message: '' };
   } catch (error) {
     return { message: 'An error occurred' };

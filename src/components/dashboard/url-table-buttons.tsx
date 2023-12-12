@@ -87,6 +87,7 @@ export function UrlTableActiveSwitch({
       const active = await toggleShortUrlActive({
         active: checked,
         shortUrlId,
+        fromViewPage: true,
       });
 
       if (active?.message) toast.error(active.message);

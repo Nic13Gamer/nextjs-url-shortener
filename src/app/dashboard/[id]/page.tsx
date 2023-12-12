@@ -1,5 +1,5 @@
 import { auth } from '@/auth';
-import { CopyUrlButton } from '@/components/dashboard/view/copy-url-button';
+import CommandBar from '@/components/dashboard/view/command-bar';
 import QRCodeCard from '@/components/dashboard/view/qrcode-card';
 import UrlUseChart from '@/components/dashboard/view/url-use-chart';
 import { buttonVariants } from '@/components/ui/button';
@@ -47,8 +47,6 @@ export default async function Page({ params }: { params: { id: string } }) {
           </p>
 
           <nav className="flex items-center gap-2">
-            <CopyUrlButton url={shortUrl} expired={expired} />
-
             <a
               href={shortUrl.destination}
               target="_blank"
@@ -70,10 +68,14 @@ export default async function Page({ params }: { params: { id: string } }) {
           </nav>
         </header>
 
-        <div className="flex gap-2">
-          <Suspense fallback={<Skeleton className="h-[400px] w-full" />}>
-            <UrlUseChart url={shortUrl} />
-          </Suspense>
+        <div className="flex justify-between gap-2">
+          <div className="flex w-full flex-col gap-2">
+            <CommandBar url={shortUrl} />
+
+            <Suspense fallback={<Skeleton className="h-[400px]" />}>
+              <UrlUseChart url={shortUrl} />
+            </Suspense>
+          </div>
 
           <div className="hidden lg:block">
             <QRCodeCard url={shortUrl} />
