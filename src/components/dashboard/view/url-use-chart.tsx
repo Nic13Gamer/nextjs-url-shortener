@@ -30,7 +30,13 @@ export default async function UrlUseChart({ url }: { url: ShortUrl }) {
       <div className="flex h-full w-full flex-col gap-2 pr-2 pt-2">
         <h1 className="text-center text-xl font-medium">Usage by date</h1>
 
-        <UrlBarChart data={chartData} />
+        {chartData.length > 0 ? (
+          <UrlBarChart data={chartData} />
+        ) : (
+          <p className="text-center opacity-80">
+            There is not enough data to display...
+          </p>
+        )}
       </div>
     </div>
   );
