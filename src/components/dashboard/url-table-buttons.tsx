@@ -46,6 +46,9 @@ export function UrlTableDeleteButton({ url }: { url: ShortUrl }) {
     if (result.message) {
       toast.error(result.message);
     }
+    if (result.success === true) {
+      toast.success('The QuickLink was deleted.');
+    }
   }
 
   return (

@@ -152,7 +152,7 @@ export async function deleteShortUrl(id: string) {
     await prisma.shortUrl.delete({ where: { id } });
 
     revalidatePath('/dashboard');
-    return { message: '' };
+    return { message: '', success: true };
   } catch (error) {
     return { message: 'An error occurred' };
   }
