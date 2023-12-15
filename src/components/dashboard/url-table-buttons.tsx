@@ -84,11 +84,13 @@ export function UrlTableActiveSwitch({
 
   useEffect(() => {
     async function toggleActive() {
-      const active = await toggleShortUrlActive({
-        active: checked,
-        shortUrlId,
-        fromViewPage: true,
-      });
+      const active = await toggleShortUrlActive(
+        {
+          active: checked,
+          shortUrlId,
+        },
+        false
+      );
 
       if (active?.message) toast.error(active.message);
     }

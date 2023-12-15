@@ -78,15 +78,16 @@ export async function generateShortUrl(prevState: any, data: FormData) {
   }
 }
 
-export async function toggleShortUrlActive({
-  active,
-  shortUrlId,
-  fromViewPage,
-}: {
-  active: boolean;
-  shortUrlId: string;
-  fromViewPage?: boolean;
-}) {
+export async function toggleShortUrlActive(
+  {
+    active,
+    shortUrlId,
+  }: {
+    active: boolean;
+    shortUrlId: string;
+  },
+  fromViewPage: boolean
+) {
   const session = await auth();
   const user = await getUser(session);
 
